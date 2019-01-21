@@ -7,6 +7,7 @@ class NewThread(Thread):
 
     def run(self):
         if self._target is not None:
+            print(self._kwargs)
             self._retorno =self._target(*self._args,**self._kwargs)
 
         else:

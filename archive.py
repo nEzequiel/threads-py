@@ -34,8 +34,13 @@ class NewFile():
     def replace_with(self,old_and_new):
         self._file=open(self._nome+"."+self._extensao,"r+")
         file_string=self._file.read()
+        self.close_file()
+
+        self._file=open(self._nome+"."+self._extensao,"w")
+        print(file_string)
         for i in old_and_new:
-            file_string.replace(str(i),old_and_new[i])
+            print(i,old_and_new[i])
+            file_string.replace("thread","a")
         self._file.write(file_string)
         self.close_file()
         print("The file was updated.")
