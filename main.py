@@ -32,7 +32,7 @@ def init_work(threads):
         thread.start()
  
     while True:
-        if not thread_1.is_alive() and not thread_2.is_alive():
+        if not threads[0].is_alive() and not threads[1].is_alive():
                 replace_thread.start()
                 break
 
