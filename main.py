@@ -1,34 +1,42 @@
 from thread import NewThread
 from archive import NewFile
 
+### Números a serem calculados
 number_list1=[1,2,3,4,5,6,7,8,9,10]
 number_list2=[11,12,13,14,15,16,17,18,19]
 
+
 my_file=NewFile("file","txt")
 
+
+## Targets para as threads de calculo e substituição
 def insert_numbers(number_list,thread):
     for number in number_list:
-        my_file.append_file(thread+str(number*2)+"\n")
+        my_file.append_file(thread+str(number**2)+"\n")
 
-
-def replace_number2(**old_and_new):
+def replace_thread(**old_and_new):
     my_file.replace_with(old_and_new)
 
 
+### Iniciando as Threads
 thread_1=NewThread(target=insert_numbers,name="insert_calc1",args=(number_list1,"thread 1: ",))
 thread_2=NewThread(target=insert_numbers,name="insert_calc2",args=(number_list2,"thread 2: ",))
-thread_3=NewThread(target=replace_number2,name="replace_calc1",args=(),kwargs={"2":"Thread 3 New"})
+replace_thread=NewThread(target=replace_thread,name="replace",args=(),kwargs={"thread":"Line: "})
 
-threads=[thread_1,thread_2,thread_3]
+calc_threads=[thread_1,thread_2]
 
+
+### Calculando e, quando o calculo é finalizado, substituindo a palavra thread
 def init_work(threads):
-    for i in threads[0:1]:
-        i.start()
-    thread_3.start()
-        
-    
+    for thread in calc_threads:
+        thread.start()
+ 
+    while True:
+        if not thread_1.is_alive() and not thread_2.is_alive():
+                replace_thread.start()
+                break
 
-
+      
 if __name__=="__main__":
-    init_work(threads)
+    init_work(calc_threads)
 
