@@ -36,7 +36,10 @@ def init_work(threads):
                 replace_thread.start()
                 break
 
-      
-if __name__=="__main__":
-    init_work(calc_threads)
+
+def main():    
+    init_work(calc_threads)      
+
+main()
+
 
